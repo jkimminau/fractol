@@ -14,30 +14,39 @@
 
 int		handle_keys(int key, t_mlx *mlx)
 {
+	printf("key = %d\n", key);
 	if (key == 53)
 	{
 		mlx_destroy_window(mlx->mlx, mlx->win);
 		exit(0);
 	}
-	if (key == 49)
-	{
-		iter_triforce(mlx);
-		mlx_clear_window(mlx->mlx, mlx->win);
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->ptr, 0, 0);
-	}
-	/*if (key == 35)
-		mlx->party = (mlx->party) ? 0 : 1;
-	if (key == 46)
-		mlx->minimal = (mlx->minimal) ? 0 : 1;
-	if (key == 45)
-		mlx->surge = (mlx->surge != 0) ? 0 : 1;
-	if (key == 11 || key == 9)
-		mlx->ss += (key == 9) ? -0.25 : 0.25;
+	//if (key == 49)	//space
 	if (key == 123 || key == 124)
-		mlx->map = (key > 123) ? rotate_x(mlx->map, -1) : rotate_x(mlx->map, 1);
+		mlx->img->x += (key > 123) ? 1 : -1;
 	if (key == 125 || key == 126)
-		mlx->map = (key > 125) ? rotate_y(mlx->map, -1) : rotate_y(mlx->map, 1);
-	if (key == 18 || key == 19)
-		mlx->map->zscale += (key == 18) ? -1 : 1;*/
+		mlx->img->y += (key == 125) ? -1 : 1;
+	if (key == 12 && mlx->img->zoom > 1)
+	{
+		mlx->mdl->min_r -= (mlx->mdl->diff_r / (4 * (mlx->img->zoom - 1)));
+		mlx->mdl->max_r += (mlx->mdl->diff_r / (4 * (mlx->img->zoom - 1)));
+		mlx->mdl->min_i -= (mlx->mdl->diff_i / (4 * (mlx->img->zoom - 1)));
+		mlx->mdl->max_i = mlx->mdl->min_i + (mlx->mdl->max_r - mlx->mdl->min_r) * WIN_LEN / WIN_WID;
+		mlx->img->zoom--;
+	}
+	if (key == 13)
+	{
+		mlx->img->zoom++;
+		mlx->mdl->min_r += (mlx->mdl->diff_r / (4 * (mlx->img->zoom - 1)));
+		mlx->mdl->max_r -= (mlx->mdl->diff_r / (4 * (mlx->img->zoom - 1)));
+		mlx->mdl->min_i += (mlx->mdl->diff_i / (4 * (mlx->img->zoom - 1)));
+		mlx->mdl->max_i = mlx->mdl->min_i + (mlx->mdl->max_r - mlx->mdl->min_r) * WIN_LEN / WIN_WID;
+	}
+	mlx_clear_window(mlx->mlx, mlx->win);
+	mandelbrot(mlx);
+	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->ptr, 0, 0);
+	printf("r_diff: %f\ti_diff: %f\n", mlx->mdl->diff_r, mlx->mdl->diff_i);
+	printf("left bound: %f\tright bound: %f\n", mlx->mdl->min_r, mlx->mdl->max_r);
+	printf("upper bound: %f\tlower bound: %f\n", mlx->mdl->min_i, mlx->mdl->max_i);
+	printf("zoom = %d\n", mlx->img->zoom);	
 	return (0);
 }

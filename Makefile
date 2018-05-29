@@ -16,7 +16,8 @@ SRC =	main.c		\
 		init.c		\
 		draw.c		\
 		key.c		\
-		triforce.c
+		triforce.c	\
+		mandelbrot.c
 
 OBJ =	$(SRC:.c=.o)
 

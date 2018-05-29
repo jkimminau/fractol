@@ -104,5 +104,6 @@ int					*ft_strtointarr(char *str);
 int					ft_wordcount(char *str);
 void				ft_putintarr(int *arr, int size);
 char				*ft_capitalize(char *str);
+double				ft_series_harmonic(int n);
 
 #endif

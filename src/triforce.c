@@ -15,17 +15,33 @@
 void	iter_triforce(t_mlx *mlx)
 {
 	int		i;
-	//int		x;
+	int		j;
 	int		y;
+	//int		c;
 
 	i = 0;
-	mlx->iter++;
-	while (i < mlx->iter)
+	y = 0;
+	while (i < ft_pow(2, mlx->iter))
 	{
-		y = 250 + (500 / ft_pow(2, mlx->iter)) + (i * 500 / ft_pow(2, mlx->iter - 1));
-		printf("y^%d = %d\n", i, y);
+		j = 0;
+		while (j < i + 1)
+		{
+			//c = 500 / (2 * (mlx->iter + 1));
+			y = (500 / ft_pow(2, mlx->iter + 1)) + (i * 500 / ft_pow(2, mlx->iter));
+			//y = (500 / ft_pow(2, mlx->iter + 1)) + (i * 500 / ft_pow(2, mlx->iter));
+			printf("y = %d ", y);
+			//x = 
+			/*while (--c)
+			{
+				y++;
+			}*/
+			j++;
+		}
 		i++;
 	}
+	//y = 250 + (500 / ft_pow(2, mlx->iter)) + (i * 500 / ft_pow(2, mlx->iter - 1));
+	mlx->iter++;
+	printf("\n");
 }
 
 void	triforce(t_mlx *mlx)
@@ -39,7 +55,7 @@ void	triforce(t_mlx *mlx)
 		x = 0;
 		while (x < y + 1)
 		{
-			img_pixel_put(mlx->img, x + (499 - y) / 2, 250 + y, 0xFFFFFF);
+			img_pixel_put(mlx->img, (x + (499 - y) / 2), y, 0x0000FF);
 			x++;
 		}
 		y++;

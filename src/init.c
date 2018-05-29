@@ -46,6 +46,9 @@ t_img	*init_img(void *mlx)
 		return (0);
 	img->data_addr = mlx_get_data_addr(img->ptr, &img->bpp, &img->line_size, &img->endian);
 	img->bpp /= 8;
+	img->x = 0;
+	img->y = 0;
+	img->zoom = 1;
 	return (img);
 }
 
@@ -61,6 +64,8 @@ t_mlx	*init_mlx(void)
 		return (mlx_free(mlx, "error initializing window pointer\n"));
 	if (!(mlx->img = init_img(mlx->mlx)))
 		return (mlx_free(mlx, "error initializing image pointer\n"));
+	if (!(mlx->mdl = (init_mandelbrot(mlx->img))))
+		return (mlx_free(mlx, "error initializing mdl ptr\n"));
 	mlx->iter = 0;
 	return (mlx);
 }

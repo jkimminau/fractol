@@ -41,7 +41,9 @@ int		main(int argc, char **argv)
 			ft_putendl("error initializing mlx");
 			exit(0);
 		}
-		triforce(mlx);
+		printf("compiling img\n");
+		mandelbrot(mlx);
+		printf("done calculating\n");
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->ptr, 0, 0);
 		mlx_key_hook(mlx->win, handle_keys, mlx);
 		//mlx_loop_hook(mlx->mlx, loop_events, mlx);

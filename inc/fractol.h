@@ -13,8 +13,8 @@
 #ifndef FDF_H
 # define FDF_H
 
-# define WIN_WID	2000
-# define WIN_LEN	1300
+# define WIN_WID	1800
+# define WIN_LEN	1000
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
@@ -30,5 +30,8 @@
 
 void		iter_triforce(t_mlx *mlx);
 void		triforce(t_mlx *mlx);
+t_mandelbrot	*init_mandelbrot(t_img *img);
+void		mandelbrot(t_mlx *mlx);
+int		get_color(int i, int iteractions); 
 
 #endif

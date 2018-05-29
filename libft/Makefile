@@ -90,7 +90,8 @@ SRC =		ft_addprefix.c		\
 			ft_strtointarr.c	\
 			ft_wordcount.c		\
 			ft_putintarr.c		\
-			ft_capitalize.c
+			ft_capitalize.c		\
+			ft_series.c
 
 GNL =		get_next_line.c		\
 
