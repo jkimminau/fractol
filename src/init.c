@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 15:56:28 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/05/17 19:54:06 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/05/30 20:09:24 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,8 @@ t_mlx	*mlx_free(t_mlx *mlx, char *errmsg)
 		free(mlx->win);
 	if (mlx)
 		free(mlx);
+	mlx->cl = 0;
 	return (0);
-}
-
-t_point			*newpoint(void)
-{
-	t_point	*point;
-
-	if (!(point = (t_point *)malloc(sizeof(t_point))))
-		return (0);
-	point->x = 0;
-	point->y = 0;
-	point->z = 0;
-	return (point);
 }
 
 t_img	*init_img(void *mlx)
@@ -66,6 +55,6 @@ t_mlx	*init_mlx(void)
 		return (mlx_free(mlx, "error initializing image pointer\n"));
 	if (!(mlx->mdl = (init_mandelbrot(mlx->img))))
 		return (mlx_free(mlx, "error initializing mdl ptr\n"));
-	mlx->iter = 0;
+	mlx->iter = 100;
 	return (mlx);
 }

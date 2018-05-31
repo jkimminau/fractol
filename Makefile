@@ -6,7 +6,7 @@
 #    By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/09 17:12:40 by jkimmina          #+#    #+#              #
-#    Updated: 2018/05/17 18:41:01 by jkimmina         ###   ########.fr        #
+#    Updated: 2018/05/30 18:06:15 by jkimmina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRC =	main.c		\
 		init.c		\
 		draw.c		\
 		key.c		\
+		mouse.c		\
 		triforce.c	\
 		mandelbrot.c
 

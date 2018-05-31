@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 19:05:44 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/05/17 19:56:07 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/05/30 20:01:57 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		main(int argc, char **argv)
 		printf("done calculating\n");
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->ptr, 0, 0);
 		mlx_key_hook(mlx->win, handle_keys, mlx);
+		mlx_mouse_hook(mlx->win, handle_mouse, mlx);
 		//mlx_loop_hook(mlx->mlx, loop_events, mlx);
 		mlx_loop(mlx->mlx);
 		mlx_free(mlx, "");
