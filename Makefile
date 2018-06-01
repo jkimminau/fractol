@@ -6,7 +6,7 @@
 #    By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/09 17:12:40 by jkimmina          #+#    #+#              #
-#    Updated: 2018/05/30 18:06:15 by jkimmina         ###   ########.fr        #
+#    Updated: 2018/06/01 16:49:19 by jkimmina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,18 +15,21 @@ NAME = fractol
 SRC =	main.c		\
 		init.c		\
 		draw.c		\
+		view.c		\
 		key.c		\
 		mouse.c		\
 		triforce.c	\
-		mandelbrot.c
+		mandelbrot.c\
+		julia.c
 
 OBJ =	$(SRC:.c=.o)
 
 HEADER = fractol.h	\
 		 init.h		\
 		 draw.h		\
+		 view.h		\
 		 structs.h	\
-		 key.h
+		 key.h		\
 
 HEADERDIR = ./inc
 

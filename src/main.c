@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 19:05:44 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/05/30 20:01:57 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/01 16:09:22 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int		main(int argc, char **argv)
 			ft_putendl("error initializing mlx");
 			exit(0);
 		}
-		printf("compiling img\n");
-		mandelbrot(mlx);
+		julia(mlx);
+		//mandelbrot(mlx);
 		printf("done calculating\n");
 		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->ptr, 0, 0);
 		mlx_key_hook(mlx->win, handle_keys, mlx);

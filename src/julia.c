@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot.c                                       :+:      :+:    :+:   */
+/*   julia.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/30 19:11:47 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/01 16:10:03 by jkimmina         ###   ########.fr       */
+/*   Created: 2018/06/01 16:06:54 by jkimmina          #+#    #+#             */
+/*   Updated: 2018/06/01 16:09:59 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
 
-t_mandelbrot	*init_mandelbrot()
+t_mandelbrot	*init_julia()
 {
 	t_mandelbrot	*tmp;
 
@@ -29,7 +29,7 @@ t_mandelbrot	*init_mandelbrot()
 	return (tmp);
 }
 
-int	get_color(int i, int iterations)
+int	get_color_j(int i, int iterations)
 {
 	int	color;
 
@@ -45,7 +45,7 @@ int	get_color(int i, int iterations)
 	return (color);
 }
 
-void	iterate(t_mandelbrot *m, t_mlx  *mlx)
+void	iterate_j(t_mandelbrot *m, t_mlx  *mlx)
 {
 	intmax_t	i;
 	double		z_r;
@@ -62,14 +62,14 @@ void	iterate(t_mandelbrot *m, t_mlx  *mlx)
 		z_i2 = z_i * z_i;
 		if (z_r2 + z_i2 > 4)
 			break;
-		z_i = (2 * z_r * z_i) + m->c_i;
-		z_r = z_r2 - z_i2 + m->c_r;
+		z_i = (2 * z_r * z_i) + 0.288;//+ m->c_i;
+		z_r = z_r2 - z_i2 + 0.353;//+ m->c_r;
 		i++;
 	}
-	img_pixel_put(mlx->img, m->x, m->y, get_color(i, mlx->iter));	
+	img_pixel_put(mlx->img, m->x, m->y, get_color_j(i, mlx->iter));	
 }
 
-void	mandelbrot(t_mlx *mlx)
+void	julia(t_mlx *mlx)
 {
 	t_mandelbrot	*m;
 
@@ -82,7 +82,7 @@ void	mandelbrot(t_mlx *mlx)
 		while (m->x < WIN_WID)
 		{
 			m->c_r = m->min_r + ((double)mlx->img->x / mlx->img->zoom) + ((double)m->x * m->scale_r);
-			iterate(m, mlx);
+			iterate_j(m, mlx);
 			m->x++;
 		}
 		m->y++;

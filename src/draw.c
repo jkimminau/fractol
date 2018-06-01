@@ -6,23 +6,11 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 17:17:21 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/05/30 19:10:57 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/01 16:17:43 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
-
-/*int		getcolor(t_mlx *mlx, t_point l)
-{
-	if (mlx->party)
-		return (color_increment(mlx->color, l.z + l.y + l.x));
-	else if (mlx->minimal)
-		return (mlx->color * l.z / mlx->map->maxz);
-	else if (mlx->surge)
-		return (mlx->color * (mlx->surge == (int)l.z));
-	else
-		return (color_increment(mlx->color, l.z * 10));
-}*/
 
 void	img_pixel_put(t_img *img, int x, int y, int color)
 {
