@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 09:57:54 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/01 16:54:33 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 14:00:18 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,7 @@ int		handle_keys(int key, t_mlx *mlx)
 	mlx->mdl->scale_r = (mlx->mdl->max_r - mlx->mdl->min_r) / (WIN_WID - 1);
 	mlx->mdl->scale_i = (mlx->mdl->max_i - mlx->mdl->min_i) / (WIN_LEN - 1);
 	mlx_clear_window(mlx->mlx, mlx->win);
-	mandelbrot(mlx);
-	julia(mlx);
+	(*mlx->fractal)(mlx);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->ptr, 0, 0);
 	printf("r_diff: %f\ti_diff: %f\n", mlx->mdl->diff_r, mlx->mdl->diff_i);
 	printf("left bound: %f\tright bound: %f\n", mlx->mdl->min_r, mlx->mdl->max_r);

@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 15:56:28 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/01 16:20:40 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 13:57:23 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_mlx	*init_mlx(void)
 		return (mlx_free(mlx, "error initializing image pointer\n"));
 	if (!(mlx->mdl = (init_mandelbrot(mlx->img))))
 		return (mlx_free(mlx, "error initializing mdl ptr\n"));
+	mlx->fractal = &julia;
 	mlx->iter = 100;
 	return (mlx);
 }

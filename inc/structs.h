@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 16:50:32 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/05/30 20:04:46 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 13:58:06 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct		s_mlx
 {
 	void			*mlx;
 	void			*win;
+	void			(*fractal)(struct s_mlx *);
 	t_img			*img;
 	int				iter;
 	t_mandelbrot	*mdl;
