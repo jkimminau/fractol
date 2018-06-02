@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 16:48:01 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/01 16:49:51 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 15:34:46 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,7 @@
 
 void	translate_x(int x, t_mlx *mlx);
 void	translate_y(int y, t_mlx *mlx);
+void	zoom(int i, t_mlx *mlx);
+void	render(t_mlx *mlx);
 
 #endif

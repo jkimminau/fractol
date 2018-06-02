@@ -6,20 +6,20 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 16:06:54 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 13:55:16 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 16:05:50 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
 
-t_mandelbrot	*init_julia()
+t_mandelbrot	*init_julia(void)
 {
 	t_mandelbrot	*tmp;
 
 	if (!(tmp = (t_mandelbrot *)malloc(sizeof(t_mandelbrot))))
 		return (0);
-	tmp->min_r = -2.15;
-	tmp->max_r = 1.15;
+	tmp->min_r = -1.65;
+	tmp->max_r = 1.65;
 	tmp->min_i = -1.15;
 	tmp->max_i = tmp->min_i + (tmp->max_r - tmp->min_r) * WIN_LEN / WIN_WID;
 	tmp->diff_r = tmp->max_r - tmp->min_r;
@@ -29,7 +29,7 @@ t_mandelbrot	*init_julia()
 	return (tmp);
 }
 
-int	get_color_j(int i, int iterations)
+int				get_color_j(int i, int iterations)
 {
 	int	color;
 
@@ -45,7 +45,7 @@ int	get_color_j(int i, int iterations)
 	return (color);
 }
 
-void	iterate_j(t_mandelbrot *m, t_mlx  *mlx)
+void			iterate_j(t_mandelbrot *m, t_mlx *mlx)
 {
 	intmax_t	i;
 	double		z_r;
@@ -61,15 +61,15 @@ void	iterate_j(t_mandelbrot *m, t_mlx  *mlx)
 		z_r2 = z_r * z_r;
 		z_i2 = z_i * z_i;
 		if (z_r2 + z_i2 > 4)
-			break;
-		z_i = (2 * z_r * z_i) + 0.288;//+ m->c_i;
-		z_r = z_r2 - z_i2 + 0.353;//+ m->c_r;
+			break ;
+		z_i = (2 * z_r * z_i) + 0.288; //k_i
+		z_r = z_r2 - z_i2 + 0.353; //k_r
 		i++;
 	}
-	img_pixel_put(mlx->img, m->x, m->y, get_color_j(i, mlx->iter));	
+	img_pixel_put(mlx->img, m->x, m->y, get_color_j(i, mlx->iter));
 }
 
-void	julia(t_mlx *mlx)
+void			julia(t_mlx *mlx)
 {
 	t_mandelbrot	*m;
 
@@ -77,11 +77,13 @@ void	julia(t_mlx *mlx)
 	m->y = 0;
 	while (m->y < WIN_LEN)
 	{
-		m->c_i = m->max_i + ((double)mlx->img->y / mlx->img->zoom) - ((double)m->y * m->scale_i);
+		m->c_i = m->max_i + ((double)mlx->img->y / mlx->img->zoom)
+			- ((double)m->y * m->scale_i);
 		m->x = 0;
 		while (m->x < WIN_WID)
 		{
-			m->c_r = m->min_r + ((double)mlx->img->x / mlx->img->zoom) + ((double)m->x * m->scale_r);
+			m->c_r = m->min_r + ((double)mlx->img->x / mlx->img->zoom)
+				+ ((double)m->x * m->scale_r);
 			iterate_j(m, mlx);
 			m->x++;
 		}

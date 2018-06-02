@@ -6,13 +6,13 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 19:11:47 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 13:53:19 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 16:03:50 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
 
-t_mandelbrot	*init_mandelbrot()
+t_mandelbrot	*init_mandelbrot(void)
 {
 	t_mandelbrot	*tmp;
 
@@ -29,7 +29,7 @@ t_mandelbrot	*init_mandelbrot()
 	return (tmp);
 }
 
-int	get_color(int i, int iterations)
+int				get_color(int i, int iterations)
 {
 	int	color;
 
@@ -45,7 +45,7 @@ int	get_color(int i, int iterations)
 	return (color);
 }
 
-void	iterate(t_mandelbrot *m, t_mlx  *mlx)
+void			iterate(t_mandelbrot *m, t_mlx *mlx)
 {
 	intmax_t	i;
 	double		z_r;
@@ -61,15 +61,15 @@ void	iterate(t_mandelbrot *m, t_mlx  *mlx)
 		z_r2 = z_r * z_r;
 		z_i2 = z_i * z_i;
 		if (z_r2 + z_i2 > 4)
-			break;
+			break ;
 		z_i = (2 * z_r * z_i) + m->c_i;
 		z_r = z_r2 - z_i2 + m->c_r;
 		i++;
 	}
-	img_pixel_put(mlx->img, m->x, m->y, get_color(i, mlx->iter));	
+	img_pixel_put(mlx->img, m->x, m->y, get_color(i, mlx->iter));
 }
 
-void	mandelbrot(t_mlx *mlx)
+void			mandelbrot(t_mlx *mlx)
 {
 	t_mandelbrot	*m;
 
@@ -77,11 +77,13 @@ void	mandelbrot(t_mlx *mlx)
 	m->y = 0;
 	while (m->y < WIN_LEN)
 	{
-		m->c_i = m->max_i + ((double)mlx->img->y / mlx->img->zoom) - ((double)m->y * m->scale_i);
+		m->c_i = m->max_i + ((double)mlx->img->y / mlx->img->zoom)
+			- ((double)m->y * m->scale_i);
 		m->x = 0;
 		while (m->x < WIN_WID)
 		{
-			m->c_r = m->min_r + ((double)mlx->img->x / mlx->img->zoom) + ((double)m->x * m->scale_r);
+			m->c_r = m->min_r + ((double)mlx->img->x / mlx->img->zoom)
+				+ ((double)m->x * m->scale_r);
 			iterate(m, mlx);
 			m->x++;
 		}

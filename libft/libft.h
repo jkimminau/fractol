@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/19 19:08:48 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/05/07 14:06:10 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 16:01:05 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,5 @@ int					*ft_strtointarr(char *str);
 int					ft_wordcount(char *str);
 void				ft_putintarr(int *arr, int size);
 char				*ft_capitalize(char *str);
-double				ft_series_harmonic(int n);
 
 #endif

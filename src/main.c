@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 19:05:44 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 13:59:46 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 16:09:36 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,6 @@
 int		loop_events(t_mlx *mlx)
 {
 	(void)mlx;
-	/*mlx->color = color_increment(mlx->color, 4 + (mlx->party * 64));
-	if (mlx->surge != 0)
-	{
-		mlx->ss = (mlx->ss > 1) ? 1 : mlx->ss;
-		mlx->ss = (mlx->ss < 0) ? 0 : mlx->ss;
-		if (mlx->surge <= 1)
-			mlx->surge = mlx->map->maxz;
-		else
-			mlx->surge -= mlx->ss;
-	}*/
-	//render(mlx);
 	return (0);
 }
 
@@ -33,22 +22,23 @@ int		main(int argc, char **argv)
 {
 	t_mlx	*mlx;
 
-	(void)argv;
-	if (argc == 1)
+	if ((argc != 2) || (!ft_strcmp(argv[1], "1") && !ft_strcmp(argv[1], "2")))
 	{
-		if (!(mlx = init_mlx()))
-		{
-			ft_putendl("error initializing mlx");
-			exit(0);
-		}
-		(*mlx->fractal)(mlx);
-		printf("done calculating\n");
-		mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->ptr, 0, 0);
-		mlx_key_hook(mlx->win, handle_keys, mlx);
-		mlx_mouse_hook(mlx->win, handle_mouse, mlx);
-		//mlx_loop_hook(mlx->mlx, loop_events, mlx);
-		mlx_loop(mlx->mlx);
-		mlx_free(mlx, "");
+		ft_putendl("usage: ./fractol [option num]");
+		ft_putendl("1) mandelbrot");
+		ft_putendl("2) julia");
+		exit(0);
 	}
+	if (!(mlx = init_mlx(argv[1])))
+	{
+		ft_putendl("error initializing mlx");
+		exit(0);
+	}
+	render(mlx);
+	mlx_key_hook(mlx->win, handle_keys, mlx);
+	mlx_mouse_hook(mlx->win, handle_mouse, mlx);
+	//mlx_loop_hook(mlx->mlx, loop_events, mlx);
+	mlx_loop(mlx->mlx);
+	mlx_free(mlx, "");
 	return (0);
 }

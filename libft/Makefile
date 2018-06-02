@@ -6,7 +6,7 @@
 #    By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/19 19:11:37 by jkimmina          #+#    #+#              #
-#    Updated: 2018/05/09 17:11:44 by jkimmina         ###   ########.fr        #
+#    Updated: 2018/06/02 16:00:58 by jkimmina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,6 @@ SRC =		ft_addprefix.c		\
 			ft_wordcount.c		\
 			ft_putintarr.c		\
 			ft_capitalize.c		\
-			ft_series.c
 
 GNL =		get_next_line.c		\
 
