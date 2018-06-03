@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 19:11:47 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 16:03:50 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 19:54:18 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,11 @@ void			mandelbrot(t_mlx *mlx)
 	m->y = 0;
 	while (m->y < WIN_LEN)
 	{
-		m->c_i = m->max_i + ((double)mlx->img->y / mlx->img->zoom)
-			- ((double)m->y * m->scale_i);
+		m->c_i = m->max_i - ((double)m->y * m->scale_i);
 		m->x = 0;
 		while (m->x < WIN_WID)
 		{
-			m->c_r = m->min_r + ((double)mlx->img->x / mlx->img->zoom)
-				+ ((double)m->x * m->scale_r);
+			m->c_r = m->min_r + ((double)m->x * m->scale_r);
 			iterate(m, mlx);
 			m->x++;
 		}

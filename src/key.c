@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 09:57:54 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 16:11:46 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 20:16:23 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,10 @@ int		handle_keys(int key, t_mlx *mlx)
 {
 	if (key == 6)
 	{
-		mlx->mdl->min_r = -2.25;
-		mlx->mdl->max_r = 2.25;
-		mlx->mdl->min_i = -1.125;
-		mlx->mdl->max_i = mlx->mdl->min_i
-			+ (mlx->mdl->max_r - mlx->mdl->min_r) * WIN_LEN / WIN_WID;
+		mlx->mdl->min_r = -2.15;
+		mlx->mdl->max_r = 1.15;
+		mlx->mdl->min_i = -1.15;
+		mlx->mdl->max_i = mlx->mdl->min_i + (mlx->mdl->max_r - mlx->mdl->min_r) * WIN_LEN / WIN_WID;
 	}
 	if (key == 49)
 		mlx->cl = (mlx->cl == 1) ? 0 : 1;
@@ -31,7 +30,7 @@ int		handle_keys(int key, t_mlx *mlx)
 	}
 	if (key == 69)
 		mlx->iter += 10;
-	if (key == 78 && mlx->iter - 10 > 0)
+	if (key == 78 && mlx->iter - 20 > 0)
 		mlx->iter -= 10;
 	if (key == 123 || key == 124)
 		translate_x(((key == 123) ? -1 : 1), mlx);

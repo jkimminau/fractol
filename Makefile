@@ -6,7 +6,7 @@
 #    By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/09 17:12:40 by jkimmina          #+#    #+#              #
-#    Updated: 2018/06/02 16:05:57 by jkimmina         ###   ########.fr        #
+#    Updated: 2018/06/02 20:42:13 by jkimmina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ SRC =	main.c		\
 		key.c		\
 		mouse.c		\
 		mandelbrot.c\
-		julia.c
+		julia.c		\
+		sinusoidal.c
 
 OBJ =	$(SRC:.c=.o)
 

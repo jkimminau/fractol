@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 16:50:32 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 15:04:43 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 19:50:39 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct		s_img
 	int		endian;
 	int		x;
 	int		y;
-	int		zoom;
 }			t_img;
 
 typedef struct		s_mlx

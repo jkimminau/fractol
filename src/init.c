@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 15:56:28 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 16:07:12 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 20:41:45 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_img	*init_img(void *mlx)
 	img->bpp /= 8;
 	img->x = 0;
 	img->y = 0;
-	img->zoom = 1;
 	return (img);
 }
 
@@ -64,6 +63,11 @@ t_mlx	*init_mlx(char *f)
 	{
 		mlx->fractal = &julia;
 		mlx->mdl = (init_julia(mlx->img));
+	}
+	if (ft_strcmp(f, "3") == 0)
+	{
+		mlx->fractal = &sinusoidal;
+		mlx->mdl = (init_sin(mlx->img));
 	}
 	if (!(mlx->mdl))
 		return (mlx_free(mlx, "error initializing jul ptr\n"));

@@ -6,23 +6,23 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 19:05:44 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 16:09:36 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 20:42:24 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		loop_events(t_mlx *mlx)
+/*int		loop_events(t_mlx *mlx)
 {
 	(void)mlx;
 	return (0);
-}
+}*/
 
 int		main(int argc, char **argv)
 {
 	t_mlx	*mlx;
 
-	if ((argc != 2) || (!ft_strcmp(argv[1], "1") && !ft_strcmp(argv[1], "2")))
+	if ((argc != 2) || (!ft_strcmp(argv[1], "1") && !ft_strcmp(argv[1], "2") && !ft_strcmp(argv[1], "3")))
 	{
 		ft_putendl("usage: ./fractol [option num]");
 		ft_putendl("1) mandelbrot");
@@ -37,6 +37,7 @@ int		main(int argc, char **argv)
 	render(mlx);
 	mlx_key_hook(mlx->win, handle_keys, mlx);
 	mlx_mouse_hook(mlx->win, handle_mouse, mlx);
+	mlx_hook(mlx->win, 6, 1L<<6, mouse_move, mlx);
 	//mlx_loop_hook(mlx->mlx, loop_events, mlx);
 	mlx_loop(mlx->mlx);
 	mlx_free(mlx, "");
