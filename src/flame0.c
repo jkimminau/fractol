@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 19:11:47 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 20:44:03 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/02 21:43:56 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,41 @@ int				get_color_s(int i, int iterations)
 	return (color);
 }
 
+void			func_list(int i, int *x, int *y)
+{
+	if (i == 0)
+	{
+		*x /= 2;
+		*y /= 2;
+	}
+	if (i == 1)
+	{
+		*x = (*x + 1) / 2;
+		*y /= 2;
+	}
+	if (i == 2)
+	{
+		*x /= 2;
+		*y = (*y + 1) / 2;
+	}
+}
+
 void			iterate_s(t_mandelbrot *m, t_mlx *mlx)
 {
 	intmax_t	i;
-	double		z_r;
-	double		z_i;
-	double		z_r2;
-	double		z_i2;
+	int			x;
+	int			y;
 
-	z_r = m->c_r;
-	z_i = m->c_i;
+	x = m->x;
+	y = m->y;
 	i = 0;
 	while (i < mlx->iter)
 	{
-		z_r2 = z_r * z_r;
-		z_i2 = z_i * z_i;
-		if (z_r2 + z_i2 > 4)
-			break ;
-		z_i = sin((2 * z_r * z_i) + m->c_i);
-		z_r = sin(z_r2 - z_i2 + sin(m->c_r));
+		func_list(i % 3, &x, &y);
+		if (i > 19)
+			img_pixel_put(mlx->img, x, y, 0xFFFFFF);
 		i++;
 	}
-	img_pixel_put(mlx->img, m->x, m->y, get_color_s(i, mlx->iter));
 }
 
 void			sinusoidal(t_mlx *mlx)
