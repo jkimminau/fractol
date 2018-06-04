@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 16:50:32 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/03 21:36:10 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/03 23:04:25 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,8 @@ typedef struct		s_img
 	int			bpp;
 	int			line_size;
 	int			endian;
-	int			thread;
-	int			x;
-	int			y;
+	//int			x;
+	//int			y;
 	int			color;
 	int			rainbow;
 }				t_img;
@@ -56,4 +55,10 @@ typedef struct		s_mlx
 	int				cl;
 }				t_mlx;
 
+typedef struct		s_thread
+{
+	pthread_t		tid;
+	int				i;
+	t_mlx			*mlx;
+}					t_thread;
 #endif

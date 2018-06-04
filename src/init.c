@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 15:56:28 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/03 17:58:07 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/03 23:05:15 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ t_img	*init_img(void *mlx)
 	img->data_addr = mlx_get_data_addr(img->ptr, &img->bpp,
 			&img->line_size, &img->endian);
 	img->bpp /= 8;
-	img->x = 0;
-	img->y = 0;
 	img->color = 0x0000FF;
 	img->rainbow = 0;
 	return (img);

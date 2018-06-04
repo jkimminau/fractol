@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 19:11:47 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/03 22:26:47 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/03 23:10:43 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void			iterate(t_mandelbrot m, t_mlx *mlx, int x, int y)
 		z_r = z_r2 - z_i2 + m.c_r;
 		i++;
 	}
-	img_pixel_put(mlx->img, x, y, get_color(i, mlx->iter));
+	img_pixel_put(mlx->img, x, y, rainbow(i, mlx->img));
+	//img_pixel_put(mlx->img, x, y, get_color(i, mlx->iter));
 }
 
 
@@ -62,10 +63,9 @@ void			*draw_thread(void *arg)
 	int				y;
 	int				x;
 
-	mlx = (t_mlx *)arg;
+	mlx = (t_mlx *)((t_thread *)arg)->mlx;
 	m = *(mlx->mdl);
-	y = mlx->img->thread;
-	printf("y = %d\n", y);
+	y = ((t_thread *)arg)->i;
 	while (y < WIN_LEN)
 	{
 		m.c_i = m.max_i - ((double)y * m.scale_i);
@@ -83,36 +83,18 @@ void			*draw_thread(void *arg)
 
 void			mandelbrot(t_mlx *mlx)
 {
-	pthread_t	tid[8];
+	t_thread	list[8];
 	int			i;
 
 	i = 0;
-	mlx->img->thread = 0;
-	while (mlx->img->thread < 8)
+	while (i < 8)
 	{
-		pthread_create(&(tid[i++]), NULL, draw_thread, (void *)mlx);
-		mlx->mdl->y++;
+		list[i].i = i;
+		list[i].mlx = mlx;
+		pthread_create(&(list[i]).tid, NULL, draw_thread, &list[i]);
+		i++;
 	}
 	i = 0;
 	while (i < 8)
-		pthread_join(tid[i++], NULL);
-
-	/*t_mandelbrot	*m;
-
-	m = mlx->mdl;
-	m->y = 0;
-	while (m->y < WIN_LEN)
-	{
-		m->c_i = m->max_i - ((double)m->y * m->scale_i);
-		m->x = 0;
-		while (m->x < WIN_WID)
-		{
-			m->c_r = m->min_r + ((double)m->x * m->scale_r);
-			iterate(m, mlx, m->x, m->y);
-			m->x++;
-		}
-		m->y += 8;
-	}*/
-	if (mlx->cl == 1)
-		center_lines(mlx);
+		pthread_join(list[i++].tid, NULL);
 }

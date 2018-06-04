@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 18:40:05 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/03 17:57:42 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/03 22:43:48 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
+# include <pthread.h>
 # include "../X11_minilibx_macos/mlx.h"
 # include "../libft/libft.h"
 # include "structs.h"

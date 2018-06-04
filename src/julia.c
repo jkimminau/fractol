@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 16:06:54 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/03 18:03:48 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/03 23:05:09 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ void			julia(t_mlx *mlx)
 	m->y = 0;
 	while (m->y < WIN_LEN)
 	{
-		m->c_i = m->max_i + mlx->img->y	- ((double)m->y * m->scale_i);
+		m->c_i = m->max_i -((double)m->y * m->scale_i);
 		m->x = 0;
 		while (m->x < WIN_WID)
 		{
-			m->c_r = m->min_r + mlx->img->x	+ ((double)m->x * m->scale_r);
+			m->c_r = m->min_r + ((double)m->x * m->scale_r);
 			iterate_j(m, mlx);
 			m->x++;
 		}
