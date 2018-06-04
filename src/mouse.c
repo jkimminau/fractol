@@ -6,11 +6,11 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 17:59:14 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 20:13:54 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/03 21:34:01 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "key.h"
+#include "mouse.h"
 
 int		mouse_move(int x, int y, t_mlx *mlx)
 {
@@ -18,7 +18,7 @@ int		mouse_move(int x, int y, t_mlx *mlx)
 		return (0);
 	mlx->mdl->k_r = mlx->mdl->min_r + (x * mlx->mdl->scale_r);
 	mlx->mdl->k_i = mlx->mdl->min_i + (y * mlx->mdl->scale_i);
-	render(mlx);
+	//render(mlx);
 	return (0);
 }
 
@@ -29,10 +29,5 @@ int		handle_mouse(int button, int x, int y, t_mlx *mlx)
 	if (button == 5 || button == 4)
 		zoom(((button == 5) ? -1 : 1), mlx);
 	render(mlx);
-	printf("r_diff: %f\ti_diff: %f\n", mlx->mdl->diff_r, mlx->mdl->diff_i);
-	printf("left bound: %f\tright bound: %f\n",
-			mlx->mdl->min_r, mlx->mdl->max_r);
-	printf("upper bound: %f\tlower bound: %f\n",
-			mlx->mdl->min_i, mlx->mdl->max_i);
 	return (0);
 }

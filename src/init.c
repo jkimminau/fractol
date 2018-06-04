@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 15:56:28 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 20:41:45 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/03 17:58:07 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ t_img	*init_img(void *mlx)
 	img->bpp /= 8;
 	img->x = 0;
 	img->y = 0;
+	img->color = 0x0000FF;
+	img->rainbow = 0;
 	return (img);
 }
 
@@ -66,8 +68,8 @@ t_mlx	*init_mlx(char *f)
 	}
 	if (ft_strcmp(f, "3") == 0)
 	{
-		mlx->fractal = &sinusoidal;
-		mlx->mdl = (init_sin(mlx->img));
+		mlx->fractal = &burningship;
+		mlx->mdl = (init_burningship(mlx->img));
 	}
 	if (!(mlx->mdl))
 		return (mlx_free(mlx, "error initializing jul ptr\n"));

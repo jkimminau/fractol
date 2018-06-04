@@ -6,11 +6,12 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 19:11:47 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 19:54:18 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/03 22:26:47 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
+#include <pthread.h>
 
 t_mandelbrot	*init_mandelbrot(void)
 {
@@ -29,23 +30,7 @@ t_mandelbrot	*init_mandelbrot(void)
 	return (tmp);
 }
 
-int				get_color(int i, int iterations)
-{
-	int	color;
-
-	if (i < (iterations / 2))
-		color = (0xFF * (i + 1) / (iterations / 2)) << 16;
-	else
-	{
-		color = (0xFF * (i + 1 - (iterations / 2)) / (iterations / 2));
-		color = color << 8;
-		color += (0xFF * (i + 1 - (iterations / 2)) / (iterations / 2));
-		color += 0xFF0000;
-	}
-	return (color);
-}
-
-void			iterate(t_mandelbrot *m, t_mlx *mlx)
+void			iterate(t_mandelbrot m, t_mlx *mlx, int x, int y)
 {
 	intmax_t	i;
 	double		z_r;
@@ -53,8 +38,8 @@ void			iterate(t_mandelbrot *m, t_mlx *mlx)
 	double		z_r2;
 	double		z_i2;
 
-	z_r = m->c_r;
-	z_i = m->c_i;
+	z_r = m.c_r;
+	z_i = m.c_i;
 	i = 0;
 	while (i < mlx->iter)
 	{
@@ -62,16 +47,57 @@ void			iterate(t_mandelbrot *m, t_mlx *mlx)
 		z_i2 = z_i * z_i;
 		if (z_r2 + z_i2 > 4)
 			break ;
-		z_i = (2 * z_r * z_i) + m->c_i;
-		z_r = z_r2 - z_i2 + m->c_r;
+		z_i = (2 * z_r * z_i) + m.c_i;
+		z_r = z_r2 - z_i2 + m.c_r;
 		i++;
 	}
-	img_pixel_put(mlx->img, m->x, m->y, get_color(i, mlx->iter));
+	img_pixel_put(mlx->img, x, y, get_color(i, mlx->iter));
+}
+
+
+void			*draw_thread(void *arg)
+{
+	t_mlx			*mlx;
+	t_mandelbrot	m;
+	int				y;
+	int				x;
+
+	mlx = (t_mlx *)arg;
+	m = *(mlx->mdl);
+	y = mlx->img->thread;
+	printf("y = %d\n", y);
+	while (y < WIN_LEN)
+	{
+		m.c_i = m.max_i - ((double)y * m.scale_i);
+		x = 0;
+		while (x < WIN_WID)
+		{
+			m.c_r = m.min_r + ((double)x * m.scale_r);
+			iterate(m, mlx, x, y);
+			x++;
+		}
+		y += 8;
+	}
+	return (NULL);
 }
 
 void			mandelbrot(t_mlx *mlx)
 {
-	t_mandelbrot	*m;
+	pthread_t	tid[8];
+	int			i;
+
+	i = 0;
+	mlx->img->thread = 0;
+	while (mlx->img->thread < 8)
+	{
+		pthread_create(&(tid[i++]), NULL, draw_thread, (void *)mlx);
+		mlx->mdl->y++;
+	}
+	i = 0;
+	while (i < 8)
+		pthread_join(tid[i++], NULL);
+
+	/*t_mandelbrot	*m;
 
 	m = mlx->mdl;
 	m->y = 0;
@@ -82,11 +108,11 @@ void			mandelbrot(t_mlx *mlx)
 		while (m->x < WIN_WID)
 		{
 			m->c_r = m->min_r + ((double)m->x * m->scale_r);
-			iterate(m, mlx);
+			iterate(m, mlx, m->x, m->y);
 			m->x++;
 		}
-		m->y++;
-	}
+		m->y += 8;
+	}*/
 	if (mlx->cl == 1)
 		center_lines(mlx);
 }

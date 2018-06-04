@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flame0.c                                           :+:      :+:    :+:   */
+/*   burningship.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/03 17:36:16 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/03 17:36:31 by jkimmina         ###   ########.fr       */
+/*   Created: 2018/06/03 17:00:02 by jkimmina          #+#    #+#             */
+/*   Updated: 2018/06/03 17:35:55 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
-#include <math.h>
 
-t_mandelbrot	*init_sin(void)
+t_mandelbrot	*init_burningship(void)
 {
 	t_mandelbrot	*tmp;
 
 	if (!(tmp = (t_mandelbrot *)malloc(sizeof(t_mandelbrot))))
 		return (0);
-	tmp->min_r = -2.15;
-	tmp->max_r = 1.15;
-	tmp->min_i = -1.15;
-	tmp->max_i = tmp->min_i + (tmp->max_r - tmp->min_r) * WIN_LEN / WIN_WID;
+	tmp->min_r = -2.16;
+	tmp->max_r = 1.5;
+	tmp->max_i = -1.87;
+	tmp->min_i = tmp->max_i + (tmp->max_r - tmp->min_r) * WIN_LEN / WIN_WID;
 	tmp->diff_r = tmp->max_r - tmp->min_r;
 	tmp->diff_i = tmp->max_i - tmp->min_i;
 	tmp->scale_r = (tmp->max_r - tmp->min_r) / (WIN_WID - 1);
@@ -30,44 +29,31 @@ t_mandelbrot	*init_sin(void)
 	return (tmp);
 }
 
-void			func_list(int i, int *x, int *y)
-{
-	if (i == 0)
-	{
-		*x /= 2;
-		*y /= 2;
-	}
-	if (i == 1)
-	{
-		*x = (*x + 1) / 2;
-		*y /= 2;
-	}
-	if (i == 2)
-	{
-		*x /= 2;
-		*y = (*y + 1) / 2;
-	}
-}
-
-void			iterate_s(t_mandelbrot *m, t_mlx *mlx)
+void			iterate_b(t_mandelbrot *m, t_mlx *mlx)
 {
 	intmax_t	i;
-	int			x;
-	int			y;
+	double		z_r;
+	double		z_i;
+	double		z_r2;
+	double		z_i2;
 
-	x = m->x;
-	y = m->y;
+	z_r = m->c_r;
+	z_i = m->c_i;
 	i = 0;
 	while (i < mlx->iter)
 	{
-		func_list(i % 3, &x, &y);
-		if (i > 19)
-			img_pixel_put(mlx->img, x, y, 0xFFFFFF);
+		z_r2 = z_r * z_r;
+		z_i2 = z_i * z_i;
+		if (z_r2 + z_i2 > 4)
+			break ;
+		z_i = fabs(2 * z_r * z_i) + m->c_i;
+		z_r = fabs(z_r2 - z_i2 + m->c_r);
 		i++;
 	}
+	img_pixel_put(mlx->img, m->x, m->y, get_color(i, mlx->iter));
 }
 
-void			sinusoidal(t_mlx *mlx)
+void			burningship(t_mlx *mlx)
 {
 	t_mandelbrot	*m;
 
@@ -80,7 +66,7 @@ void			sinusoidal(t_mlx *mlx)
 		while (m->x < WIN_WID)
 		{
 			m->c_r = m->min_r + ((double)m->x * m->scale_r);
-			iterate_s(m, mlx);
+			iterate_b(m, mlx);
 			m->x++;
 		}
 		m->y++;

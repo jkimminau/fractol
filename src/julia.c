@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 16:06:54 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 19:54:48 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/03 18:03:48 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,6 @@ t_mandelbrot	*init_julia(void)
 	return (tmp);
 }
 
-int				get_color_j(int i, int iterations)
-{
-	int	color;
-
-	if (i < (iterations / 2))
-		color = (0xFF * (i + 1) / (iterations / 2)) << 16;
-	else
-	{
-		color = (0xFF * (i + 1 - (iterations / 2)) / (iterations / 2));
-		color = color << 8;
-		color += (0xFF * (i + 1 - (iterations / 2)) / (iterations / 2));
-		color += 0xFF0000;
-	}
-	return (color);
-}
-
 void			iterate_j(t_mandelbrot *m, t_mlx *mlx)
 {
 	intmax_t	i;
@@ -62,11 +46,11 @@ void			iterate_j(t_mandelbrot *m, t_mlx *mlx)
 		z_i2 = z_i * z_i;
 		if (z_r2 + z_i2 > 4)
 			break ;
-		z_i = (2 * z_r * z_i) + mlx->mdl->k_i; //k_i
-		z_r = z_r2 - z_i2 + mlx->mdl->k_r; //k_r
+		z_i = (2 * z_r * z_i) + mlx->mdl->k_i;
+		z_r = z_r2 - z_i2 + mlx->mdl->k_r;
 		i++;
 	}
-	img_pixel_put(mlx->img, m->x, m->y, get_color_j(i, mlx->iter));
+	img_pixel_put(mlx->img, m->x, m->y, rainbow(i, mlx->img));
 }
 
 void			julia(t_mlx *mlx)

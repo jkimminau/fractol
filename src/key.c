@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 09:57:54 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 20:16:23 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/03 18:01:16 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		handle_keys(int key, t_mlx *mlx)
 		mlx->mdl->max_i = mlx->mdl->min_i + (mlx->mdl->max_r - mlx->mdl->min_r) * WIN_LEN / WIN_WID;
 	}
 	if (key == 49)
-		mlx->cl = (mlx->cl == 1) ? 0 : 1;
+		mlx->img->rainbow = (mlx->img->rainbow == 1) ? 0 : 1;
 	if (key == 53)
 	{
 		mlx_destroy_window(mlx->mlx, mlx->win);
@@ -40,8 +40,8 @@ int		handle_keys(int key, t_mlx *mlx)
 		zoom(((key == 12) ? 1 : -1), mlx);
 	render(mlx);
 	//printf("key = %d\n", key);
-	printf("left bound: %f\tright bound: %f\n", mlx->mdl->min_r, mlx->mdl->max_r);
-	printf("upper bound: %f\tlower bound: %f\n", mlx->mdl->min_i, mlx->mdl->max_i);
-	printf("iter = %d\n", mlx->iter);
+	//printf("left bound: %f\tright bound: %f\n", mlx->mdl->min_r, mlx->mdl->max_r);
+	//printf("upper bound: %f\tlower bound: %f\n", mlx->mdl->min_i, mlx->mdl->max_i);
+	//printf("iter = %d\n", mlx->iter);
 	return (0);
 }

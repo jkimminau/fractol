@@ -6,7 +6,7 @@
 #    By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/09 17:12:40 by jkimmina          #+#    #+#              #
-#    Updated: 2018/06/02 21:15:58 by jkimmina         ###   ########.fr        #
+#    Updated: 2018/06/03 17:35:28 by jkimmina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,11 @@ SRC =	main.c		\
 		view.c		\
 		key.c		\
 		mouse.c		\
+		color.c		\
 		mandelbrot.c\
 		julia.c		\
-		flame0.c
+		flame0.c	\
+		burningship.c
 
 OBJ =	$(SRC:.c=.o)
 
