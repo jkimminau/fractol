@@ -6,12 +6,11 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 19:11:47 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/03 23:10:43 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/04 13:22:56 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
-#include <pthread.h>
 
 t_mandelbrot	*init_mandelbrot(void)
 {
@@ -30,7 +29,7 @@ t_mandelbrot	*init_mandelbrot(void)
 	return (tmp);
 }
 
-void			iterate(t_mandelbrot m, t_mlx *mlx, int x, int y)
+void			iterate_mdl(t_mandelbrot m, t_mlx *mlx, int x, int y)
 {
 	intmax_t	i;
 	double		z_r;
@@ -51,12 +50,12 @@ void			iterate(t_mandelbrot m, t_mlx *mlx, int x, int y)
 		z_r = z_r2 - z_i2 + m.c_r;
 		i++;
 	}
-	img_pixel_put(mlx->img, x, y, rainbow(i, mlx->img));
-	//img_pixel_put(mlx->img, x, y, get_color(i, mlx->iter));
+	//img_pixel_put(mlx->img, x, y, rainbow(i, mlx->img));
+	img_pixel_put(mlx->img, x, y, get_color(i, mlx->iter));
 }
 
 
-void			*draw_thread(void *arg)
+void			*mdl_thread(void *arg)
 {
 	t_mlx			*mlx;
 	t_mandelbrot	m;
@@ -73,7 +72,7 @@ void			*draw_thread(void *arg)
 		while (x < WIN_WID)
 		{
 			m.c_r = m.min_r + ((double)x * m.scale_r);
-			iterate(m, mlx, x, y);
+			iterate_mdl(m, mlx, x, y);
 			x++;
 		}
 		y += 8;
@@ -91,7 +90,7 @@ void			mandelbrot(t_mlx *mlx)
 	{
 		list[i].i = i;
 		list[i].mlx = mlx;
-		pthread_create(&(list[i]).tid, NULL, draw_thread, &list[i]);
+		pthread_create(&(list[i]).tid, NULL, mdl_thread, &list[i]);
 		i++;
 	}
 	i = 0;
