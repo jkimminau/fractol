@@ -6,14 +6,16 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 16:50:32 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/03 23:04:25 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/05 15:21:12 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-typedef struct	s_mandelbrot
+#include <pthread.h>
+
+typedef struct	s_cmp_fr
 {
 	int			x;
 	int			y;
@@ -29,7 +31,8 @@ typedef struct	s_mandelbrot
 	double		scale_i;
 	double		k_r;
 	double		k_i;
-}				t_mandelbrot;
+	int			iter;
+}				t_cmp_fr;
 
 typedef struct		s_img
 {
@@ -38,22 +41,27 @@ typedef struct		s_img
 	int			bpp;
 	int			line_size;
 	int			endian;
-	//int			x;
-	//int			y;
+}				t_img;
+
+typedef struct		s_color
+{
+	int			mode;
+	int			max_modes;
 	int			color;
 	int			rainbow;
-}				t_img;
+	int			(*get_color)(int, t_cmp_fr *, struct s_color *);
+}				t_color;
 
 typedef struct		s_mlx
 {
 	void			*mlx;
 	void			*win;
-	void			(*fractal)(struct s_mlx *);
 	t_img			*img;
-	int				iter;
-	t_mandelbrot	*mdl;
-	int				cl;
-}				t_mlx;
+	t_cmp_fr		*fr;
+	t_color			*color;
+	int				frac;
+	void			(*iterate)(t_cmp_fr, struct s_mlx *, int, int);
+}					t_mlx;
 
 typedef struct		s_thread
 {

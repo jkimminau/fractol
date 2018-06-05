@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.h                                             :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/02 19:03:04 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 12:30:34 by jkimmina         ###   ########.fr       */
+/*   Created: 2018/06/05 13:08:33 by jkimmina          #+#    #+#             */
+/*   Updated: 2018/06/05 15:21:16 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DRAW_H
-# define DRAW_H
+#ifndef COLOR_H
+# define COLOR_H
 
-# include "fractol.h"
+# include <structs.h>
 
-void	img_pixel_put(t_img *img, int x, int y, int color);
-void	center_lines(t_mlx *mlx);
+int				color_increment(int color, int num);
+int				scalar(int i, t_cmp_fr *fr, t_color *color);
+int				seuss(int i, t_cmp_fr *fr, t_color *color);
+int				rainbow(int i, t_cmp_fr *fr, t_color *color);
+void			shuffle_mode(t_color *color);
 
 #endif

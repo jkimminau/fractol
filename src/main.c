@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 19:05:44 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/03 18:20:19 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/05 16:15:49 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,41 @@
 
 int		loop_events(t_mlx *mlx)
 {
-	if (mlx->img->rainbow)
+	if (mlx->color->rainbow && mlx->color->mode == 3)
 	{
-		mlx->img->color = color_increment(mlx->img->color, 10);
+		mlx->color->color = color_increment(mlx->color->color, 10);
 		render(mlx);
 	}
 	return (0);
 }
 
-int		main(int argc, char **argv)
+int		get_option(int ac, char **av)
+{
+	if (ac != 2)
+		return (-1);
+	if (ft_strcmp(av[1], "1") == 0)
+		return (1);
+	if (ft_strcmp(av[1], "2") == 0)
+		return (2);
+	if (ft_strcmp(av[1], "3") == 0)
+		return (3);
+	return (-1);
+}
+
+int		main(int ac, char **av)
 {
 	t_mlx	*mlx;
+	int		option;
 
-	if ((argc != 2) || (!ft_strcmp(argv[1], "1") && !ft_strcmp(argv[1], "2") && !ft_strcmp(argv[1], "3")))
+	if	((option = get_option(ac, av)) == -1)
 	{
 		ft_putendl("usage: ./fractol [option num]");
 		ft_putendl("1) mandelbrot");
 		ft_putendl("2) julia");
+		ft_putendl("3) burningship");
 		exit(0);
 	}
-	if (!(mlx = init_mlx(argv[1])))
+	if (!(mlx = init_mlx(option)))
 	{
 		ft_putendl("error initializing mlx");
 		exit(0);

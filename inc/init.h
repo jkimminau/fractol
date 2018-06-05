@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 18:32:29 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/02 14:16:24 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/05 14:55:53 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 
 t_mlx	*mlx_free(t_mlx *mlx, char *errmsg);
 t_img	*init_img(void *mlx);
-t_mlx	*init_mlx(char *f);
+t_mlx	*init_mlx(int frac);
 
 #endif

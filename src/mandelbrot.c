@@ -6,17 +6,17 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 19:11:47 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/04 13:22:56 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/05 15:20:37 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fractol.h>
 
-t_mandelbrot	*init_mandelbrot(void)
+t_cmp_fr	*init_mandelbrot(void)
 {
-	t_mandelbrot	*tmp;
+	t_cmp_fr	*tmp;
 
-	if (!(tmp = (t_mandelbrot *)malloc(sizeof(t_mandelbrot))))
+	if (!(tmp = (t_cmp_fr *)malloc(sizeof(t_cmp_fr))))
 		return (0);
 	tmp->min_r = -2.15;
 	tmp->max_r = 1.15;
@@ -26,10 +26,11 @@ t_mandelbrot	*init_mandelbrot(void)
 	tmp->diff_i = tmp->max_i - tmp->min_i;
 	tmp->scale_r = (tmp->max_r - tmp->min_r) / (WIN_WID - 1);
 	tmp->scale_i = (tmp->max_i - tmp->min_i) / (WIN_LEN - 1);
+	tmp->iter = 100;
 	return (tmp);
 }
 
-void			iterate_mdl(t_mandelbrot m, t_mlx *mlx, int x, int y)
+void			iterate_mdl(t_cmp_fr m, t_mlx *mlx, int x, int y)
 {
 	intmax_t	i;
 	double		z_r;
@@ -40,7 +41,7 @@ void			iterate_mdl(t_mandelbrot m, t_mlx *mlx, int x, int y)
 	z_r = m.c_r;
 	z_i = m.c_i;
 	i = 0;
-	while (i < mlx->iter)
+	while (i < m.iter)
 	{
 		z_r2 = z_r * z_r;
 		z_i2 = z_i * z_i;
@@ -50,50 +51,5 @@ void			iterate_mdl(t_mandelbrot m, t_mlx *mlx, int x, int y)
 		z_r = z_r2 - z_i2 + m.c_r;
 		i++;
 	}
-	//img_pixel_put(mlx->img, x, y, rainbow(i, mlx->img));
-	img_pixel_put(mlx->img, x, y, get_color(i, mlx->iter));
-}
-
-
-void			*mdl_thread(void *arg)
-{
-	t_mlx			*mlx;
-	t_mandelbrot	m;
-	int				y;
-	int				x;
-
-	mlx = (t_mlx *)((t_thread *)arg)->mlx;
-	m = *(mlx->mdl);
-	y = ((t_thread *)arg)->i;
-	while (y < WIN_LEN)
-	{
-		m.c_i = m.max_i - ((double)y * m.scale_i);
-		x = 0;
-		while (x < WIN_WID)
-		{
-			m.c_r = m.min_r + ((double)x * m.scale_r);
-			iterate_mdl(m, mlx, x, y);
-			x++;
-		}
-		y += 8;
-	}
-	return (NULL);
-}
-
-void			mandelbrot(t_mlx *mlx)
-{
-	t_thread	list[8];
-	int			i;
-
-	i = 0;
-	while (i < 8)
-	{
-		list[i].i = i;
-		list[i].mlx = mlx;
-		pthread_create(&(list[i]).tid, NULL, mdl_thread, &list[i]);
-		i++;
-	}
-	i = 0;
-	while (i < 8)
-		pthread_join(list[i++].tid, NULL);
+	img_pixel_put(mlx->img, x, y, (mlx->color->get_color)(i, mlx->fr, mlx->color));
 }

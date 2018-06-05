@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 15:56:28 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/03 23:05:15 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/05 15:41:30 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ t_mlx	*mlx_free(t_mlx *mlx, char *errmsg)
 		free(mlx->win);
 	if (mlx)
 		free(mlx);
-	mlx->cl = 0;
 	return (0);
 }
 
@@ -36,12 +35,45 @@ t_img	*init_img(void *mlx)
 	img->data_addr = mlx_get_data_addr(img->ptr, &img->bpp,
 			&img->line_size, &img->endian);
 	img->bpp /= 8;
-	img->color = 0x0000FF;
-	img->rainbow = 0;
 	return (img);
 }
 
-t_mlx	*init_mlx(char *f)
+t_color	*init_color()
+{
+	t_color		*color;
+
+	color = (t_color *)malloc(sizeof(t_color));
+	color->mode = 1;
+	color->max_modes = 3;
+	color->color = 0xFF;
+	color->rainbow = 0;
+	color->get_color = &scalar;
+	return (color);
+}
+
+t_cmp_fr	*init_cmp_fr(int frac, t_mlx *mlx)
+{
+	t_cmp_fr	*fr;
+
+	if (frac == 1)
+	{
+		mlx->iterate = &iterate_mdl;
+		fr = (init_mandelbrot(mlx->img));
+	}
+	if (frac == 2)
+	{
+		mlx->iterate = &iterate_jul;
+		fr = (init_julia(mlx->img));
+	}
+	if (frac == 3)
+	{
+		mlx->iterate = &iterate_jul;
+		fr = (init_burningship(mlx->img));
+	}
+	return (fr);
+}
+
+t_mlx		*init_mlx(int frac)
 {
 	t_mlx	*mlx;
 
@@ -54,23 +86,10 @@ t_mlx	*init_mlx(char *f)
 		return (mlx_free(mlx, "error initializing window pointer\n"));
 	if (!(mlx->img = init_img(mlx->mlx)))
 		return (mlx_free(mlx, "error initializing image pointer\n"));
-	if (ft_strcmp(f, "1") == 0)
-	{
-		mlx->fractal = &mandelbrot;
-		mlx->mdl = (init_mandelbrot(mlx->img));
-	}
-	if (ft_strcmp(f, "2") == 0)
-	{
-		mlx->fractal = &julia;
-		mlx->mdl = (init_julia(mlx->img));
-	}
-	if (ft_strcmp(f, "3") == 0)
-	{
-		mlx->fractal = &burningship;
-		mlx->mdl = (init_burningship(mlx->img));
-	}
-	if (!(mlx->mdl))
-		return (mlx_free(mlx, "error initializing jul ptr\n"));
-	mlx->iter = 100;
+	if (!(mlx->fr = init_cmp_fr(frac, mlx)))
+		return (mlx_free(mlx, "error initializing frac ptr\n"));
+	if (!(mlx->color = init_color()))
+		return (mlx_free(mlx, "error initializing color ptr\n"));
+	mlx->frac = frac;
 	return (mlx);
 }
