@@ -6,15 +6,15 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 18:40:05 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 15:03:45 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/05 21:13:46 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# define WIN_WID	700
-# define WIN_LEN	500
+# define WIN_WID	1400
+# define WIN_LEN	1000
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>

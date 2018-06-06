@@ -6,7 +6,7 @@
 #    By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/09 17:12:40 by jkimmina          #+#    #+#              #
-#    Updated: 2018/06/05 13:59:11 by jkimmina         ###   ########.fr        #
+#    Updated: 2018/06/05 21:13:40 by jkimmina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC =	main.c		\
 		key.c		\
 		mouse.c		\
 		color.c		\
+		color2.c	\
 		mandelbrot.c\
 		julia.c		\
 		burningship.c

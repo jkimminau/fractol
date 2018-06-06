@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 17:17:21 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 14:34:06 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/05 20:04:11 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,6 @@ void	img_pixel_put(t_img *img, int x, int y, int color)
 {
 	if (x >= 0 && x < WIN_WID && y >= 0 && y < WIN_LEN)
 		*(int *)(img->data_addr + ((x + y * WIN_WID) * img->bpp)) = color;
-}
-
-void	center_lines(t_mlx *mlx)
-{
-	int	i;
-
-	i = 0;
-	while (i < WIN_WID)
-		img_pixel_put(mlx->img, i++, WIN_LEN / 2, 0xFFFFFF);
-	i = 0;
-	while (i < WIN_LEN)
-		img_pixel_put(mlx->img, WIN_WID / 2, i++, 0xFFFFFF);
 }
 
 void	*draw_thread(void *arg)
@@ -50,18 +38,18 @@ void	*draw_thread(void *arg)
 			(*mlx->iterate)(fr, mlx, x, y);
 			x++;
 		}
-		y += 8;
+		y += THREADS;
 	}
 	return (NULL);
 }
 
 void	render(t_mlx *mlx)
 {
-	t_thread	list[8];
+	t_thread	list[THREADS];
 	int			i;
 
 	i = 0;
-	while (i < 8)
+	while (i < THREADS)
 	{
 		list[i].i = i;
 		list[i].mlx = mlx;
@@ -69,7 +57,7 @@ void	render(t_mlx *mlx)
 		i++;
 	}
 	i = 0;
-	while (i < 8)
+	while (i < THREADS)
 		pthread_join(list[i++].tid, NULL);
 
 	mlx_clear_window(mlx->mlx, mlx->win);

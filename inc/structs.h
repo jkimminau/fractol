@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 16:50:32 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 15:21:12 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/05 21:04:49 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 
 typedef struct	s_cmp_fr
 {
-	int			x;
-	int			y;
 	double		min_r;
 	double		max_r;
 	double		min_i;
@@ -48,6 +46,7 @@ typedef struct		s_color
 	int			mode;
 	int			max_modes;
 	int			color;
+	int			pulse;
 	int			rainbow;
 	int			(*get_color)(int, t_cmp_fr *, struct s_color *);
 }				t_color;
@@ -60,6 +59,7 @@ typedef struct		s_mlx
 	t_cmp_fr		*fr;
 	t_color			*color;
 	int				frac;
+	int				mouselock;
 	void			(*iterate)(t_cmp_fr, struct s_mlx *, int, int);
 }					t_mlx;
 

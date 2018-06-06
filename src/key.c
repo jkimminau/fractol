@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 09:57:54 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 15:41:46 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/05 19:07:24 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 int		handle_keys(int key, t_mlx *mlx)
 {
-	if (key == 6)
+	if (key == 6 || (key >= 18 && key <= 20))
 	{
-		//free (mlx->fr);
-		//mlx->fr = 
+		if (key != 6)
+			mlx->frac = key - 17;;
+		free (mlx->fr);
+		mlx->fr = init_cmp_fr(mlx->frac, mlx);
 	}
 	if (key == 8)
 		shuffle_mode(mlx->color);
@@ -39,10 +41,5 @@ int		handle_keys(int key, t_mlx *mlx)
 	if (key == 12 || key == 13)
 		zoom(((key == 12) ? 1 : -1), mlx);
 	render(mlx);
-	//printf("key = %d\n", key);
-	//printf("color = %d\n", mlx->color->mode);
-	//printf("left bound: %f\tright bound: %f\n", mlx->mdl->min_r, mlx->mdl->max_r);
-	//printf("upper bound: %f\tlower bound: %f\n", mlx->mdl->min_i, mlx->mdl->max_i);
-	//printf("iter = %d\n", mlx->iter);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 13:08:33 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 15:21:16 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/05 21:13:56 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # include <structs.h>
 
-int				color_increment(int color, int num);
+int				color_select(int color, int num);
 int				scalar(int i, t_cmp_fr *fr, t_color *color);
 int				seuss(int i, t_cmp_fr *fr, t_color *color);
 int				rainbow(int i, t_cmp_fr *fr, t_color *color);
+int				pulse(int i, t_cmp_fr *fr, t_color *color);
 void			shuffle_mode(t_color *color);
 
 #endif

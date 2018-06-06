@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse.h                                            :+:      :+:    :+:   */
+/*   color2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/30 18:06:35 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 16:46:10 by jkimmina         ###   ########.fr       */
+/*   Created: 2018/06/05 21:08:11 by jkimmina          #+#    #+#             */
+/*   Updated: 2018/06/05 21:23:47 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MOUSE_H
-# define MOUSE_H
+#include <color.h>
 
-# include "fractol.h"
-
-int		mouse_move(int x, int y, t_mlx *mlx);
-int		handle_mouse(int button, int x, int y, t_mlx *mlx);
-
-#endif
+int		pulse(int i, t_cmp_fr *fr, t_color *color)
+{
+	(void)fr;
+	if (i == color->pulse)
+	{
+		if (color->rainbow)
+			return (color_select(color->color, 0));
+		return (color_select(color->color, i * 8));
+	}
+	return (0);
+}
