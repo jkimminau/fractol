@@ -6,14 +6,14 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 16:50:32 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 21:04:49 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/06 15:47:32 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
-#include <pthread.h>
+# include <pthread.h>
 
 typedef struct	s_cmp_fr
 {
@@ -32,7 +32,7 @@ typedef struct	s_cmp_fr
 	int			iter;
 }				t_cmp_fr;
 
-typedef struct		s_img
+typedef struct	s_img
 {
 	void		*ptr;
 	char		*data_addr;
@@ -41,7 +41,7 @@ typedef struct		s_img
 	int			endian;
 }				t_img;
 
-typedef struct		s_color
+typedef struct	s_color
 {
 	int			mode;
 	int			max_modes;
@@ -51,22 +51,22 @@ typedef struct		s_color
 	int			(*get_color)(int, t_cmp_fr *, struct s_color *);
 }				t_color;
 
-typedef struct		s_mlx
+typedef struct	s_mlx
 {
-	void			*mlx;
-	void			*win;
-	t_img			*img;
-	t_cmp_fr		*fr;
-	t_color			*color;
-	int				frac;
-	int				mouselock;
-	void			(*iterate)(t_cmp_fr, struct s_mlx *, int, int);
-}					t_mlx;
+	void		*mlx;
+	void		*win;
+	t_img		*img;
+	t_cmp_fr	*fr;
+	t_color		*color;
+	int			frac;
+	int			mouselock;
+	void		(*iterate)(t_cmp_fr, struct s_mlx *, int, int);
+}				t_mlx;
 
-typedef struct		s_thread
+typedef struct	s_thread
 {
 	pthread_t		tid;
 	int				i;
 	t_mlx			*mlx;
-}					t_thread;
+}				t_thread;
 #endif

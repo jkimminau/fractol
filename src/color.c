@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/03 17:31:30 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 21:12:39 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/06 15:52:57 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,4 @@ void	shuffle_mode(t_color *color)
 		color->get_color = &rainbow;
 	if (color->mode == 4)
 		color->get_color = &pulse;
-
 }

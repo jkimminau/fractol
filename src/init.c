@@ -6,26 +6,34 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 15:56:28 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 21:28:14 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/06 15:51:03 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "init.h"
 
-t_mlx	*mlx_free(t_mlx *mlx, char *errmsg)
+t_mlx		*mlx_free(t_mlx *mlx, char *errmsg)
 {
 	ft_putstr(errmsg);
+	if (mlx->color != 0)
+		free(mlx->color);
+	if (mlx->fr != 0)
+		free(mlx->fr);
+	if (mlx->img != 0)
+	{
+		free(mlx->img->ptr);
+		free(mlx->img->data_addr);
+		free(mlx->img);
+	}
+	if (mlx->win != 0)
+		mlx_destroy_window(mlx->mlx, mlx->win);
 	if (mlx->mlx != 0)
-		free(mlx->mlx);
-	//if (mlx->win)
-		//free(mlx->win);
-	if (mlx != 0)
-		free(mlx);
-	sleep(100);
+		mlx_del(mlx->mlx);
+	free(mlx);
 	return (0);
 }
 
-t_img	*init_img(void *mlx)
+t_img		*init_img(void *mlx)
 {
 	t_img	*img;
 
@@ -39,7 +47,7 @@ t_img	*init_img(void *mlx)
 	return (img);
 }
 
-t_color	*init_color()
+t_color		*init_color(void)
 {
 	t_color		*color;
 
@@ -81,9 +89,13 @@ t_mlx		*init_mlx(int frac)
 
 	if (!(mlx = (t_mlx *)malloc(sizeof(t_mlx))))
 		return (0);
+	mlx->mlx = 0;
+	mlx->win = 0;
+	mlx->img = 0;
+	mlx->fr = 0;
+	mlx->color = 0;
 	if (!(mlx->mlx = mlx_init()))
 		return (mlx_free(mlx, "error initializing mlx pointer\n"));
-	mlx_free(mlx, "");
 	if (!(mlx->win = mlx_new_window(mlx->mlx,
 					WIN_WID, WIN_LEN, "fractol - 42")))
 		return (mlx_free(mlx, "error initializing window pointer\n"));

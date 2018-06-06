@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 19:11:47 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 15:20:37 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/06 15:50:16 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_cmp_fr	*init_mandelbrot(void)
 	return (tmp);
 }
 
-void			iterate_mdl(t_cmp_fr m, t_mlx *mlx, int x, int y)
+void		iterate_mdl(t_cmp_fr m, t_mlx *mlx, int x, int y)
 {
 	intmax_t	i;
 	double		z_r;
@@ -51,5 +51,6 @@ void			iterate_mdl(t_cmp_fr m, t_mlx *mlx, int x, int y)
 		z_r = z_r2 - z_i2 + m.c_r;
 		i++;
 	}
-	img_pixel_put(mlx->img, x, y, (mlx->color->get_color)(i, mlx->fr, mlx->color));
+	img_pixel_put(mlx->img, x, y,
+			(mlx->color->get_color)(i, mlx->fr, mlx->color));
 }

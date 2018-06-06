@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 17:17:21 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 20:04:11 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/06 15:45:47 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ void	render(t_mlx *mlx)
 	i = 0;
 	while (i < THREADS)
 		pthread_join(list[i++].tid, NULL);
-
 	mlx_clear_window(mlx->mlx, mlx->win);
 	mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img->ptr, 0, 0);
 }
-

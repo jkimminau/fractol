@@ -6,7 +6,7 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 16:06:54 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 21:12:44 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/06/06 15:49:57 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,6 @@ void			iterate_jul(t_cmp_fr m, t_mlx *mlx, int x, int y)
 		z_r = z_r2 - z_i2 + m.k_r;
 		i++;
 	}
-	img_pixel_put(mlx->img, x, y, (mlx->color->get_color)(i, mlx->fr, mlx->color));
+	img_pixel_put(mlx->img, x, y,
+			(mlx->color->get_color)(i, mlx->fr, mlx->color));
 }
