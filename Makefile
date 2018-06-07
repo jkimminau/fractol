@@ -6,7 +6,7 @@
 #    By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/09 17:12:40 by jkimmina          #+#    #+#              #
-#    Updated: 2018/06/05 21:13:40 by jkimmina         ###   ########.fr        #
+#    Updated: 2018/06/06 17:10:08 by jkimmina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ LIBFT = ./libft/libft.a
 LIBFTLINK = -L./libft/ -lft
 
 LIBMLX = ./minilibx/libmlx.a
-LIBMLXLINK = -L./X11_minilibx_macos/ -lmlx -framework OpenGL -framework AppKit
+LIBMLXLINK = -L./minilibx/ -lmlx -framework OpenGL -framework AppKit
 
 .PHONY: all clean fclean re
 
@@ -55,7 +55,7 @@ $(LIBFT):
 libmlx: $(LIBMLX)
 
 $(LIBMLX): 
-	make -C ./X11_minilibx_macos/
+	make -C ./minilibx/
 
 $(NAME): $(LIBFT) $(LIBMLX)
 	gcc $(FLAGS) -c $(addprefix src/, $(SRC)) -I$(HEADERDIR)
@@ -67,6 +67,6 @@ clean:
 fclean: clean
 	/bin/rm -f $(NAME)
 	make fclean -C libft/
-	make clean -C X11_minilibx_macos/
+	make clean -C minilibx/
 
 re: fclean all
