@@ -53,7 +53,7 @@ t_color		*init_color(void)
 
 	color = (t_color *)malloc(sizeof(t_color));
 	color->mode = 1;
-	color->max_modes = 4;
+	color->max_modes = 5;
 	color->color = 0;
 	color->pulse = 0;
 	color->rainbow = 0;

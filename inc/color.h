@@ -20,6 +20,7 @@ int				scalar(int i, t_cmp_fr *fr, t_color *color);
 int				seuss(int i, t_cmp_fr *fr, t_color *color);
 int				rainbow(int i, t_cmp_fr *fr, t_color *color);
 int				pulse(int i, t_cmp_fr *fr, t_color *color);
+int				abstract(int i, t_cmp_fr *fr, t_color *color);
 void			shuffle_mode(t_color *color);
 
 #endif

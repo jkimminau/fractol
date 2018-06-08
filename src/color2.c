@@ -23,3 +23,9 @@ int		pulse(int i, t_cmp_fr *fr, t_color *color)
 	}
 	return (0);
 }
+
+int		abstract(int i, t_cmp_fr *fr, t_color *color)
+{
+	(void)fr;
+	return (0xFFFFFF - (0xFFFFFF * i / color->max_modes));
+}

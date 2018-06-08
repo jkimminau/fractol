@@ -84,4 +84,6 @@ void	shuffle_mode(t_color *color)
 		color->get_color = &rainbow;
 	if (color->mode == 4)
 		color->get_color = &pulse;
+	if (color->mode == 5)
+		color->get_color = &abstract;
 }
