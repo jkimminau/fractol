@@ -6,11 +6,11 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 09:57:54 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/06 15:45:22 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/08/17 14:00:49 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "key.h"
+#include <fractol.h>
 
 void	handle_image_options(int key, t_mlx *mlx)
 {

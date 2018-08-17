@@ -6,11 +6,11 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/05 21:08:11 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 21:23:47 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/08/17 14:00:11 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <color.h>
+#include <fractol.h>
 
 int		pulse(int i, t_cmp_fr *fr, t_color *color)
 {

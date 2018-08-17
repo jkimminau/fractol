@@ -6,34 +6,27 @@
 #    By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/09 17:12:40 by jkimmina          #+#    #+#              #
-#    Updated: 2018/06/06 17:10:08 by jkimmina         ###   ########.fr        #
+#    Updated: 2018/08/17 14:32:53 by jkimmina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-SRC =	main.c		\
-		init.c		\
-		draw.c		\
-		view.c		\
-		key.c		\
-		mouse.c		\
-		color.c		\
-		color2.c	\
-		mandelbrot.c\
-		julia.c		\
-		burningship.c
+SRC =	./src/main.c		\
+		./src/init.c		\
+		./src/draw.c		\
+		./src/view.c		\
+		./src/key.c		\
+		./src/mouse.c		\
+		./src/color.c		\
+		./src/color2.c	\
+		./src/mandelbrot.c\
+		./src/julia.c		\
+		./src/burningship.c
 
 OBJ =	$(SRC:.c=.o)
 
-HEADER = fractol.h	\
-		 init.h		\
-		 draw.h		\
-		 view.h		\
-		 structs.h	\
-		 key.h		\
-
-HEADERDIR = ./inc
+HEADERDIR = .
 
 FLAGS = -Wall -Werror -Wextra
 
@@ -49,6 +42,10 @@ all: $(NAME)
 
 libft: $(LIBFT)
 
+$(OBJ): $(SRC)
+	gcc $(FLAGS) -c $(SRC) -I$(HEADERDIR)
+	@mv *.o ./src
+
 $(LIBFT):
 	make -C ./libft
 
@@ -57,9 +54,8 @@ libmlx: $(LIBMLX)
 $(LIBMLX): 
 	make -C ./minilibx/
 
-$(NAME): $(LIBFT) $(LIBMLX)
-	gcc $(FLAGS) -c $(addprefix src/, $(SRC)) -I$(HEADERDIR)
-	gcc $(LIBRARY) $(OBJ) -o $(NAME) $(LIBFTLINK) $(LIBMLXLINK)
+$(NAME): $(LIBFT) $(LIBMLX) $(OBJ)
+	gcc $(OBJ) -o $(NAME) $(LIBFTLINK) $(LIBMLXLINK)
 
 clean:
 	/bin/rm -f $(OBJ) $(HEADER:.h=.h.gch)

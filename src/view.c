@@ -6,11 +6,11 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/01 16:22:02 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/05 16:46:25 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/08/17 14:45:17 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <view.h>
+#include <fractol.h>
 
 void	translate_x(int x, t_mlx *mlx)
 {

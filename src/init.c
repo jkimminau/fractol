@@ -6,11 +6,11 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 15:56:28 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/06 15:51:03 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/08/17 14:00:31 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "init.h"
+#include <fractol.h>
 
 t_mlx		*mlx_free(t_mlx *mlx, char *errmsg)
 {

@@ -6,11 +6,11 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/02 17:17:21 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/06 15:45:47 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/08/17 14:43:16 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "draw.h"
+#include <fractol.h>
 
 void	img_pixel_put(t_img *img, int x, int y, int color)
 {

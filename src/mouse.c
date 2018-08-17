@@ -6,11 +6,11 @@
 /*   By: jkimmina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 17:59:14 by jkimmina          #+#    #+#             */
-/*   Updated: 2018/06/06 15:49:44 by jkimmina         ###   ########.fr       */
+/*   Updated: 2018/08/17 14:23:52 by jkimmina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mouse.h"
+#include <fractol.h>
 
 int		mouse_move(int x, int y, t_mlx *mlx)
 {
