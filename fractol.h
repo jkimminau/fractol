@@ -21,8 +21,8 @@
 # include <math.h>
 # include <fcntl.h>
 # include <pthread.h>
-# include "../minilibx/mlx.h"
-# include "../libft/libft.h"
+# include "./minilibx/mlx.h"
+# include "./libft/libft.h"
 
 typedef struct	s_cmp_fr
 {

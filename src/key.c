@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <fractol.h>
+#include <stdio.h>
 
 void	handle_image_options(int key, t_mlx *mlx)
 {
@@ -18,15 +19,15 @@ void	handle_image_options(int key, t_mlx *mlx)
 		shuffle_mode(mlx->color);
 	if (key == 49)
 		mlx->color->rainbow = (mlx->color->rainbow == 1) ? 0 : 1;
-	if (key == 69)
+	if (key == 16)
 		mlx->fr->iter += 10;
-	if (key == 78 && mlx->fr->iter - 20 > 0)
+	if (key == 17 && mlx->fr->iter - 20 > 0)
 		mlx->fr->iter -= 10;
 }
 
 int		handle_keys(int key, t_mlx *mlx)
 {
-	if (key == 8 || key == 49 || key == 69 || key == 78)
+	if (key == 8 || key == 49 || key == 16 || key == 17)
 		handle_image_options(key, mlx);
 	if (key == 6 || (key >= 18 && key <= 20))
 	{

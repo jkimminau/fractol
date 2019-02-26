@@ -79,7 +79,7 @@ int		main(int ac, char **av)
 	}
 	print_controls();
 	render(mlx);
-	mlx_key_hook(mlx->win, handle_keys, mlx);
+	mlx_hook(mlx->win, 2, 0, handle_keys, mlx);
 	mlx_mouse_hook(mlx->win, handle_mouse, mlx);
 	mlx_hook(mlx->win, 6, 1L << 6, mouse_move, mlx);
 	mlx_loop_hook(mlx->mlx, loop_events, mlx);
